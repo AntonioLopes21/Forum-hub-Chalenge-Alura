@@ -17,20 +17,9 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class TopicoController {
 
-    private final TopicoRepository topicoRepository;
-    private final CursoRepository cursoRepository;
-    private final UsuarioRepository usuarioRepository;
-
     @PostMapping
     public ResponseEntity<CriarTopicoDTO> criarTopico(@Valid @RequestBody CriarTopicoDTO dto) {
-        Usuario autor = usuarioRepository.findByNome(dto.nomeAutor())
-                .orElseThrow(() -> new RuntimeException("Autor não encontrado"));
 
-        Curso curso = cursoRepository.findById(dto.cursoId())
-                .orElseThrow(() -> new RuntimeException("Curso não encontrado"));
-
-        Topico novoTopico = new Topico(dto.titulo(), dto.mensagem(), autor, curso);
-        topicoRepository.save(novoTopico);
 
         return ResponseEntity.status(201).body(novoTopico.toDTO());
     }

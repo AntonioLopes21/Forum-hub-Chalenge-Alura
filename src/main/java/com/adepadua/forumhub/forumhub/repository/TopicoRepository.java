@@ -10,4 +10,6 @@ import java.util.Optional;
 public interface TopicoRepository extends JpaRepository<Topico, Long> {
     Optional<Topico> findByTitulo(String titulo);
     Optional<Topico> findByMensagem(String mensagem);
+
+    boolean existsByTituloAndMensagem(String titulo, String mensagem);
 }
