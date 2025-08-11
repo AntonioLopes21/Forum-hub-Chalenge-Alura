@@ -1,7 +1,7 @@
 package com.adepadua.forumhub.forumhub.repository;
 
 import com.adepadua.forumhub.forumhub.model.entity.Curso;
-=import com.adepadua.forumhub.forumhub.model.enums.Categoria;
+import com.adepadua.forumhub.forumhub.model.enums.Categoria;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

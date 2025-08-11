@@ -1,13 +1,12 @@
 package com.adepadua.forumhub.forumhub.model.entity;
 
+import com.adepadua.forumhub.forumhub.model.dto.CriarTopicoDTO;
 import com.adepadua.forumhub.forumhub.model.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-
-import java.nio.MappedByteBuffer;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -46,12 +45,14 @@ public class Topico {
     @Enumerated(value = EnumType.STRING)
     private Status status;
 
-    public Topico(String titulo, String mensagem, LocalDate dataCriacao, Status status, Usuario autor, Curso curso) {
+    public Topico(String titulo, String mensagem, Usuario autor, Curso curso) {
         this.titulo = titulo;
         this.mensagem = mensagem;
-        this.dataCriacao = dataCriacao;
-        this.status = status;
         this.autor = autor;
         this.curso = curso;
+    }
+
+    public CriarTopicoDTO toDTO() {
+        return new CriarTopicoDTO(this.getTitulo(), this.getMensagem(), this.getAutor().getNome(), this.getCurso().getId());
     }
 }

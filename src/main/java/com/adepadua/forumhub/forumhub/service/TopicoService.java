@@ -15,7 +15,7 @@ public class TopicoService {
 
     public CriarTopicoDTO criarTopico(Topico topico) {
         topicoRepository.save(topico);
-        return new CriarTopicoDTO(topico.getTitulo(), topico.getMensagem(), topico.getAutor().getNome(), topico.getCurso());
+        return new CriarTopicoDTO(topico.getTitulo(), topico.getMensagem(), topico.getAutor().getNome(), topico.getCurso().getId());
     }
 
 }
