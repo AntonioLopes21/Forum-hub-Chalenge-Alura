@@ -1,6 +1,7 @@
 package com.adepadua.forumhub.forumhub.model.entity;
 
 import com.adepadua.forumhub.forumhub.model.dto.CriarTopicoDTO;
+import com.adepadua.forumhub.forumhub.model.dto.ExibirTopicoDTO;
 import com.adepadua.forumhub.forumhub.model.enums.Status;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -54,5 +55,9 @@ public class Topico {
 
     public CriarTopicoDTO toDTO() {
         return new CriarTopicoDTO(this.getTitulo(), this.getMensagem(), this.getAutor().getNome(), this.getCurso().getId());
+    }
+
+    public ExibirTopicoDTO listarEspecifico() {
+        return new ExibirTopicoDTO(this.getTitulo(), this.getMensagem(), this.getDataCriacao(), this.getStatus(),this.getAutor(), this.getCurso());
     }
 }
