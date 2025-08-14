@@ -12,4 +12,6 @@ public interface TopicoRepository extends JpaRepository<Topico, Long> {
     Optional<Topico> findByMensagem(String mensagem);
 
     boolean existsByTituloAndMensagem(String titulo, String mensagem);
+
+    boolean existsByTituloAndMensagemAndIdNot(String titulo, String mensagem, Long id);
 }

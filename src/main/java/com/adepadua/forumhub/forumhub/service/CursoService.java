@@ -14,7 +14,6 @@ public class CursoService {
 
     //post
     public CriarCursoDTO criarCurso(@Valid CriarCursoDTO dto) {
-        var c = cursoRepository.findByName();
         cursoRepository.save(dto.toEntity());
         return dto;
     }

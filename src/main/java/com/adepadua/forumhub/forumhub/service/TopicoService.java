@@ -1,6 +1,7 @@
 package com.adepadua.forumhub.forumhub.service;
 
 import com.adepadua.forumhub.forumhub.model.dto.CriarTopicoDTO;
+import com.adepadua.forumhub.forumhub.model.dto.EditarTopicoDTO;
 import com.adepadua.forumhub.forumhub.model.dto.ExibirTopicoDTO;
 import com.adepadua.forumhub.forumhub.model.entity.Curso;
 import com.adepadua.forumhub.forumhub.model.entity.Topico;
@@ -8,14 +9,12 @@ import com.adepadua.forumhub.forumhub.model.entity.Usuario;
 import com.adepadua.forumhub.forumhub.repository.CursoRepository;
 import com.adepadua.forumhub.forumhub.repository.TopicoRepository;
 import com.adepadua.forumhub.forumhub.repository.UsuarioRepository;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -67,6 +66,23 @@ public class TopicoService {
         return topico.listarEspecifico();
     }
 
-    public void editarTopico(Long id, CriarTopicoDTO dto) {
+    public ExibirTopicoDTO editarTopico(Long id, EditarTopicoDTO dto) {
+        Topico topico = topicoRepository.findById(id).orElseThrow(() -> new RuntimeException("Tópico não encontrado com ID: " + id));
+
+        boolean existeDuplicado = topicoRepository.existsByTituloAndMensagemAndIdNot(dto.titulo(), dto.mensagem(), id);
+        if (existeDuplicado) {
+            throw new RuntimeException("Tópico com mesmo título e mensagem já existe.");
+        }
+
+        if (dto.titulo() != null && !dto.titulo().isBlank()) {
+            topico.setTitulo(dto.titulo());
+        }
+        if (dto.mensagem() != null && !dto.mensagem().isBlank()) {
+            topico.setMensagem(dto.mensagem());
+        }
+        topicoRepository.save(topico);
+
+        return topico.listarEspecifico();
     }
+
 }

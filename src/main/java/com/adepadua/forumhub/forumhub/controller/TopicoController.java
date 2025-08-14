@@ -1,6 +1,7 @@
 package com.adepadua.forumhub.forumhub.controller;
 
 import com.adepadua.forumhub.forumhub.model.dto.CriarTopicoDTO;
+import com.adepadua.forumhub.forumhub.model.dto.EditarTopicoDTO;
 import com.adepadua.forumhub.forumhub.model.dto.ExibirTopicoDTO;
 import com.adepadua.forumhub.forumhub.model.entity.Curso;
 import com.adepadua.forumhub.forumhub.model.entity.Topico;
@@ -41,8 +42,8 @@ public class TopicoController {
     }
 
    @PutMapping("/{id}")
-   public ResponseEntity<ExibirTopicoDTO> editarTopico(@PathVariable Long id ,@Valid @RequestBody CriarTopicoDTO dto) {
-        topicoService.editarTopico(id, dto);
+       public ResponseEntity<ExibirTopicoDTO> editarTopico(@PathVariable Long id , @Valid @RequestBody EditarTopicoDTO dto) {
+        return ResponseEntity.status(HttpStatus.OK).body(topicoService.editarTopico(id, dto));
    }
 
 
